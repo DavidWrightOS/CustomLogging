@@ -16,11 +16,18 @@ let package = Package(
             targets: ["CustomLogging"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", "11.0.0"..<"12.0.0"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "CustomLogging"
+            name: "CustomLogging",
+            dependencies: [
+                .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
+            ]
         ),
         .testTarget(
             name: "CustomLoggingTests",
